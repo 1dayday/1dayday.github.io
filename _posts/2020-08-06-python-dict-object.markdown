@@ -2,7 +2,7 @@
 layout: post
 title:  Python中的Dict对象
 date:   2020-08-06 22:43:34 +0800
-tags:   python
+tags:   Python CPython Python源码剖析 散列表
 ---
 * TOC
 {:toc}

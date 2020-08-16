@@ -2,7 +2,7 @@
 layout: post
 title:  Python中的整型对象
 date:   2020-07-13 14:56:43 +0800
-tags:   python
+tags:   Python CPython Python源码剖析 整数
 ---
 * TOC
 {:toc}

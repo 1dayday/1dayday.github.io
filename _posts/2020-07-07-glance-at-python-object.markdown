@@ -2,7 +2,7 @@
 layout: post
 title:  Python对象初探
 date:   2020-07-07 19:23:19 +0800
-tags:   python
+tags:   Python CPython Python源码剖析
 ---
 * TOC
 {:toc}

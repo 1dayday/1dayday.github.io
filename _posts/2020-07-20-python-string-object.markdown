@@ -2,7 +2,7 @@
 layout: post
 title:  Python中的字符串对象
 date:   2020-07-20 16:12:23 +0800
-tags:   python
+tags:   Python CPython Python源码剖析 字符串
 ---
 * TOC
 {:toc}

@@ -2,7 +2,7 @@
 layout: post
 title:  Python中的List对象
 date:   2020-07-27 12:07:03 +0800
-tags:   python
+tags:   Python CPython Python源码剖析 列表
 ---
 * TOC
 {:toc}
