@@ -233,7 +233,7 @@ lookdict(PyDictObject *mp, PyObject *key, register long hash)
     * 搜索成功则将对象置为Dummy态，并调整相关计数
 
 [PyCon 2010: The Mighty Dictionary](https://www.youtube.com/watch?v=C4Kc8xzcA68)
-视频结尾的QA中提到Python2.x并**不会在减少`PyDictObject`元素数量时减少内存空间占用**，这需要将所有的KV复制到一个新的`PyDictObject`对象中！
+视频结尾的QA中提到Python 2.x并**不会在减少`PyDictObject`元素数量时减少内存空间占用**，这需要将所有的KV复制到一个新的`PyDictObject`对象中！
 
 # PyDictObject对象缓冲池
 
