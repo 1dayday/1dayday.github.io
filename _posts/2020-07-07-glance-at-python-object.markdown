@@ -12,7 +12,7 @@ tags:   Python CPython Python源码剖析
 1. 一切都是对象（实例、类型、函数等等）
 2. 一个对象一旦被创建，它在内存中的大小就是不变的了
 
-# Python内的对象
+## Python内的对象
 
 **[`PyObject`](https://github.com/python/cpython/blob/v3.8.3/Include/object.h#L99-L108)**
 
@@ -40,7 +40,7 @@ typedef struct {
 其中Python 3中`PyIntObject`类型已经统一到`PyLongObject`类型，是一个变长对象。
 ![175482.jpg](/assets/analysis-of-the-python-source-code/175482.jpg)
 
-# 类型对象
+## 类型对象
 
 **[`PyTypeObject`](https://github.com/python/cpython/blob/v3.8.3/Include/cpython/object.h#L177-L270)**
 
@@ -114,18 +114,18 @@ PyTypeObject PyType_Type = {
 
 ![175552.jpg](/assets/analysis-of-the-python-source-code/175552.jpg)
 
-# Python对象的多态性
+## Python对象的多态性
 
 *Polymorphism n. 多态性*
 
 > 通过`PyObject`和`PyTypeObject`，Python利用C语言完成了C++所提供的对象的多态的特性。在Python创建一个对象，比如`PyIntObject`对象时，会分配内存，进行初始化。然后Python内部会用一个`PyObject*`变量，而不是通过一个`PyIntObject*`变量来保存和维护这个对象。其他对象也与此类似，所以在Python内部各个函数之间传递的都是一种范型指针 —— `PyObject*`。这个指针所指的对象究竟是什么类型的，我们不知道，只能从指针所指对象的`ob_type`域动态进行判断，而正是通过这个域，Python实现了多态机制。
 
-# 引用计数
+## 引用计数
 
 > `PyObject`中的`ob_refcnt`是一个[`Py_ssize_t`](https://www.python.org/dev/peps/pep-0353/)变量，这实际蕴含着Python所做的一个假设，即对一个对象的引用不会超过`Py_ssize_t`的最大值。
 > 在每一个对象创建的时候，Python提供了一个[`_Py_NewReference(op)`](https://github.com/python/cpython/blob/v3.8.3/Include/object.h#L436-L444)宏来将对象的引用计数初始化为1。
 
-# Python对象的分类
+## Python对象的分类
 
 - Fundamental对象：类型对象
 - Numeric对象：数值对象

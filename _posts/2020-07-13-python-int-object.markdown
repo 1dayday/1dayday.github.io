@@ -32,7 +32,7 @@ struct _longobject {
 typedef struct _longobject PyLongObject; /* Revealed in longintrepr.h */
 ```
 
-# 小整数对象
+## 小整数对象
 
 > 在Python中，对小整数对象使用了对象池技术。由于整型对象是不可变对象，对象池里的每一个整型对象都能够被任意地共享。
 
@@ -55,7 +55,7 @@ static PyLongObject small_ints[NSMALLNEGINTS + NSMALLPOSINTS];
 
 Python中小整数的范围为**`[-5, 257)`**.
 
-# 大整数对象
+## 大整数对象
 
 Python 2.x采用`PyIntBlock`维护通用整数对象池（包括小整数对象）。
 当创建新的整数对象时，若整数对象池没有空闲的内存，则[`fill_free_list`](https://github.com/python/cpython/blob/v2.7.18/Objects/intobject.c#L47-L65)函数会申请创建一个新的整数对象块，并返回下一个空闲内存地址。

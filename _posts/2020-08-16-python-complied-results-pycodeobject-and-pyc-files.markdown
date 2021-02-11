@@ -9,12 +9,12 @@ tags:   Python CPython Python源码剖析 编译原理
 
 摘自：[《Python源码剖析》 — 陈儒](https://read.douban.com/ebook/1499455/)
 
-# Python程序的执行过程
+## Python程序的执行过程
 
 1. Python解释器对`.py`文件中的Python源代码进行编译，产生一组Python的字节码（Bytecode），存在对应的`.pyc`文件中
 2. Python虚拟机将编译结果按顺序一条一条执行字节码，从而完成Python程序的执行动作
 
-# PyCodeObject对象
+## PyCodeObject对象
 
 **[`PyCodeObject`](https://github.com/python/cpython/blob/v2.7.18/Include/code.h#L9-L30)**
 
@@ -51,7 +51,7 @@ typedef struct {
 
 > "当作为模块被`import`的时候，或者已有`.pyc`文件但需要更新的时候会编译出`.pyc`文件。"
 
-# `.pyc`文件的生成
+## `.pyc`文件的生成
  
 Python 2.x中[`write_compiled_module`](https://github.com/python/cpython/blob/v2.7.18/Python/import.c#L945-L993)这段代码讲述了Python在将编译得到的`PyCodeObject`写入到`.pyc`文件中时到底进行了怎样的动作；这段代码在Python 3.3中被重新实现，见[issue13959](https://bugs.python.org/issue13959)及[相关变更](https://github.com/python/cpython/commit/16475adcbb9b8131da2a1615bfbeb34a358e7400#diff-12fb18f1056d99e8480487a481f553620)。
 
@@ -79,7 +79,7 @@ typedef struct {
 } WFILE;
 ```
 
-# Python的字节码
+## Python的字节码
 
 * Python 2.7.18 [opcode.h](https://github.com/python/cpython/blob/v2.7.18/Include/opcode.h)
 * Python 3.8.3  [opcode.h](https://github.com/python/cpython/blob/v3.8.3/Include/opcode.h)

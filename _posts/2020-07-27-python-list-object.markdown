@@ -36,14 +36,14 @@ typedef struct {
 
 当列表元素个数超过`allocated`或者不足`allocated // 2`（即一半）时，对列表长度进行调整为`size_t new_allocated = (size_t)newsize + (newsize >> 3) + (newsize < 9 ? 3 : 6);`
 
-# PyListObject对象的创建与维护
+## PyListObject对象的创建与维护
 
-#### 创建对象 `PyObject * PyList_New(Py_ssize_t size)`
+### 创建对象 `PyObject * PyList_New(Py_ssize_t size)`
 
 1. 创建`PyListObject`对象，优先复用对象缓存池资源
 2. 根据参数`size`分配列表元素内存空间
 
-#### PyListObject对象缓冲池 `free_lists`
+### PyListObject对象缓冲池 `free_lists`
 
 > `free_lists`中所缓冲的`PyListObject`对象是在一个`PyListObject`被销毁的过程中获得的。
 

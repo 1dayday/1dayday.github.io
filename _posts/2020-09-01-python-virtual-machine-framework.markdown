@@ -9,7 +9,7 @@ tags:   Python CPython Python源码剖析 虚拟机
 
 摘自：[《Python源码剖析》 — 陈儒](https://read.douban.com/ebook/1499455/)
 
-# Python虚拟机中的执行环境
+## Python虚拟机中的执行环境
 
 *可执行文件运行时的运行时栈*
 ![178484.jpg](/assets/analysis-of-the-python-source-code/178484.jpg)
@@ -62,7 +62,7 @@ typedef struct _frame {
 *新创建的PyFrameObject对象*
 ![178486.jpg](/assets/analysis-of-the-python-source-code/178486.jpg)
 
-# 名字、作用域和名字空间
+## 名字、作用域和名字空间
 
 > Python中引入module的概念，其主要目的是将一些逻辑相关的代码放到一个module中，以备日后使用，即实现代码复用；而另一个目的则是为整个系统划分名字空间。
 
@@ -78,25 +78,25 @@ typedef struct _frame {
 
 > Python的名字引用的行为被它所支持的嵌套作用域影响，产生的就是最内嵌套作用域规则：由一个赋值语句引进的名字在这个赋值语句所在的作用域里是可见（起作用）的，而且在其内部嵌套的每个作用域里也可见，除非它被嵌套于内部的，引进同样名字的另一条赋值语句所遮蔽。
 
-## LGB规则
+### LGB规则
 
 *Python 2.2之前的LGB作用域规则*\
 ![178489.jpg](/assets/analysis-of-the-python-source-code/178489.jpg)
 
-## LEGB规则
+### LEGB规则
 
 Local > Enclosing > Global > Builtin
 
 > 从Python 2.2开始，Python引入了嵌套函数，这时的作用域规则才更接近最内嵌套作用域规则。Python实现闭包是为了实现最内嵌套作用域规则。
 
-# Python虚拟机的运行框架
+## Python虚拟机的运行框架
 
 * Python 2.7.18 [`PyEval_EvalFrameEx`](https://github.com/python/cpython/blob/v2.7.18/Python/ceval.c#L688-L3364)
 * Python 3.8.3 [`_PyEval_EvalFrameDefault`](https://github.com/python/cpython/blob/v3.8.3/Python/ceval.c#L744-L3818)
 
 > 在`PyCodeObject`对象的`co_code`域中保存着字节码指令和字节码指令的参数，Python虚拟机执行字节码指令序列的过程就是从头到尾遍历整个`co_code`、依次执行字节码指令的过程。在Python的虚拟机中，利用3个变量来完成整个遍历过程。`co_code`实际上是一个`PyStringObject`对象，而其中的字符数组才是真正有意义的东西，这也就是说，整个字节码指令序列实际上就是一个在C中普普通通的字符数组。因此，遍历过程中所使用的这3个变量都是`char*`类型的变量：`first_instr`永远指向字节码指令序列的开始位置；`next_instr`永远指向下一条待执行的字节码指令的位置；`f_lasti`指向上一条已经执行过的字节码指令的位置。
 
-# Python运行时环境初探
+## Python运行时环境初探
 
 1. Python实现了对多线程的支持
 2. Python中的一个线程就是操作系统上的一个原生线程

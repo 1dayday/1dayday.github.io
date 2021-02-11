@@ -72,16 +72,16 @@ Python 2.x中使用了一种关联容器`PyDictEntry`，在`PyDictEntry`中，`m
 当`PyDictEntry`数量超过8个时，Python将会申请额外的内存空间，并将`ma_table`指向这块空间。
 ![178447.jpg](/assets/analysis-of-the-python-source-code/178447.jpg)
 
-# PyDictObject对象的创建和维护
+## PyDictObject对象的创建和维护
 
-#### 对象创建 `PyObject * PyDict_New(void)`
+### 对象创建 `PyObject * PyDict_New(void)`
 
 1. 自动初始化全局Dummy态`PyDictEntry`对象
 2. 创建`PyDictObject`对象，优先复用对象缓存池资源
 3. 将`ma_smalltable`清零，同时设置`ma_fill`和`ma_used`均为`0`
 4. 将`ma_table`指向`ma_smalltable`，并设置`ma_mask`为`7`
 
-#### 元素搜索策略
+### 元素搜索策略
 
 > Python为`PyDictObject`对象提供了两种搜索策略，[`lookdict`](https://github.com/python/cpython/blob/v2.7.18/Objects/dictobject.c#L295-L396)和[`lookdict_string`](https://github.com/python/cpython/blob/v2.7.18/Objects/dictobject.c#L398-L457)。实际上，这两种策略使用的是相同的算法，`lookdict_string`只是`lookdict`的一种针对`PyStringObject`对象的特殊形式。
 
@@ -210,7 +210,7 @@ lookdict(PyDictObject *mp, PyObject *key, register long hash)
 
 > `lookdict_string`实际上就是一个`lookdict`对于`PyStringDict`对象的优化版本。在`lookdict`中有许多捕捉错误并处理错误的代码，因为`lookdict`面对的是`PyObject*`，所以会出现很多意外情况；而在`lookdict_string`中，完全没有了这些处理错误的代码。而另一方面，在`lookdict`中，使用的是非常通用的`PyObject_RichCompareBool`，而`lookdict_string`使用的是`_PyString_Eq`，要简单很多，这些因素使得`lookdict_string`的搜索效率要比`lookdict`高很多。
 
-#### 插入与删除
+### 插入与删除
 
 **插入**
 
@@ -235,6 +235,6 @@ lookdict(PyDictObject *mp, PyObject *key, register long hash)
 [PyCon 2010: The Mighty Dictionary](https://www.youtube.com/watch?v=C4Kc8xzcA68)
 视频结尾的QA中提到Python 2.x并**不会在减少`PyDictObject`元素数量时减少内存空间占用**，这需要将所有的KV复制到一个新的`PyDictObject`对象中！
 
-# PyDictObject对象缓冲池
+## PyDictObject对象缓冲池
 
 `PyDictObject`使用了与`PyListObject`一样的对象缓冲池机制，默认大小为80个。
